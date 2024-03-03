@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from openai import OpenAI
+from langchain.llms import OpenAI
 
 # Assuming OPENAI_API_KEY is set as an environment variable for security reasons
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -9,7 +9,6 @@ if OPENAI_API_KEY is None:
     st.error("OpenAI API key not found. Please set the OPENAI_API_KEY environment variable.")
     st.stop()
 
-# Initialize OpenAI with the API key
 llm = OpenAI(openai_api_key=OPENAI_API_KEY)
 
 st.title("Ask Bunty")
@@ -34,7 +33,7 @@ if st.button("Send") and user_input:
     st.session_state.messages.append({"role": "user", "content": user_input})
 
     # Generate and display response
-    response = llm.chat(user_input)  # Using OpenAI's chat method
+    response = llm.predict(user_input)
     st.session_state.messages.append({"role": "Bunty", "content": response})
 
     # Clear the input box after sending the message
