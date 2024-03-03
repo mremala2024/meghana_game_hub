@@ -2,3 +2,4 @@ streamlit
 streamlit_chatbox
 simplejson
 openai
+langchain
